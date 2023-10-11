@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login with Discord</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    .discord-button {
+      background-color: #7289DA;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Login with Discord</h1>
+  <p>Click the button below to log in with your Discord account:</p>
+  <a href="#" class="discord-button" onclick="loginWithDiscord()">Login with Discord</a>
+</div>
+
+<script>
+  function loginWithDiscord() {
+    // Replace YOUR_CLIENT_ID and REDIRECT_URI with your actual values
+    const clientId = '1160292132934922343';
+    const redirectUri = 'https://your-github-username.github.io/your-repository/callback'; // Update this with your GitHub Pages URL
+
+    // Redirect the user to Discord's OAuth2 authorization URL
+    window.location.href = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=identify`;
+  }
+</script>
+
+</body>
+</html>
