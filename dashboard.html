@@ -5,7 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Discord Dashboard</title>
   <style>
-    /* Styles remain unchanged */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    header {
+      background-color: #7289DA;
+      color: #fff;
+      padding: 15px;
+      text-align: right;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+    #userProfile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    #userImage {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-top: 10px;
+    }
+    #username {
+      font-size: 1.5em;
+      margin-top: 10px;
+    }
+    #discriminator {
+      color: #999;
+      margin-top: 5px;
+    }
+    #aboutMe {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -20,8 +56,7 @@
     <div id="userImage"></div>
     <div id="username"></div>
     <div id="discriminator"></div>
-    <img id="userBanner" alt="User Banner">
-    <div id="badges"></div>
+    <div id="aboutMe"></div>
   </div>
 </div>
 
@@ -46,34 +81,6 @@
     } catch (error) {
       console.error('Error fetching user information:', error);
       return null;
-    }
-  }
-
-  // Function to display user badges
-  function displayBadges(user) {
-    const badgesContainer = document.getElementById('badges');
-
-    if (user.flags) {
-      const badges = [];
-      
-      // Check for specific flags using bitwise operations
-      if (user.flags & 1 << 0) {
-        badges.push('DISCORD_EMPLOYEE');
-      }
-      if (user.flags & 1 << 1) {
-        badges.push('PARTNERED_SERVER_OWNER');
-      }
-      // Add more checks for other flags as needed
-
-      console.log('Badges:', badges);
-
-      if (badges.length > 0) {
-        badgesContainer.innerHTML = badges.map(badge => `<img src="https://discord.com/assets/${badge}.png" alt="${badge}" class="badge">`).join('');
-      } else {
-        badgesContainer.innerHTML = '<p>No badges</p>';
-      }
-    } else {
-      badgesContainer.innerHTML = '<p>No badges</p>';
     }
   }
 
@@ -109,10 +116,9 @@
       document.getElementById('userImage').style.backgroundImage = `url('https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png')`;
       document.getElementById('username').innerText = user.username;
       document.getElementById('discriminator').innerText = `#${user.discriminator}`;
-      document.getElementById('userBanner').src = user.banner ? `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.png` : '';
 
-      // Display badges
-      displayBadges(user);
+      // Display "About Me" section
+      document.getElementById('aboutMe').innerHTML = `<p>About Me:</p><p>${user.bio || 'No bio available'}</p>`;
 
       // Show the user profile section
       document.getElementById('userProfile').style.display = 'flex';
