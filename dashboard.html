@@ -106,15 +106,19 @@
     document.getElementById('userProfile').style.display = 'flex';
   }
 
-  // Function to display user badges
-  function displayBadges(user) {
-    const badgesContainer = document.getElementById('badges');
+// Function to display user badges
+function displayBadges(user) {
+  const badgesContainer = document.getElementById('badges');
 
-    if (user.public_flags) {
-      const badges = user.public_flags.toArray();
-      badgesContainer.innerHTML = badges.map(badge => `<img src="https://discord.com/assets/${badge}.png" alt="${badge}" class="badge">`).join('');
-    }
+  if (user.public_flags) {
+    const badges = Object.entries(user.public_flags)
+      .filter(([key, value]) => value)
+      .map(([key]) => key);
+
+    badgesContainer.innerHTML = badges.map(badge => `<img src="https://discord.com/assets/${badge}.png" alt="${badge}" class="badge">`).join('');
   }
+}
+
 
   // Check if the URL contains the 'code' parameter
   const authorizationCode = getQueryParameter('code');
