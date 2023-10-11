@@ -281,6 +281,7 @@
 
       if (storedMinecraftNick) {
         minecraftNickDisplay.innerHTML = `<p>Minecraft Nickname: ${storedMinecraftNick}</p>`;
+        minecraftNickDisplay.classList.toggle('dark-mode', darkModeToggle.checked); // Added this line
       } else {
         minecraftNickDisplay.innerHTML = '<p>No Minecraft Nickname</p>';
       }
