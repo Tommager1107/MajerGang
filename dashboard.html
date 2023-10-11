@@ -118,13 +118,59 @@
     #minecraftNickDisplay.dark-mode {
       color: #fff; /* Set the color for dark mode */
     }
+
+    /* Slider Styles */
+    .slider-container {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .slider-label {
+      margin-right: 10px;
+      color: #333;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 50px;
+      height: 25px;
+      background: #ddd;
+      outline: none;
+      border-radius: 25px;
+      transition: background 0.3s;
+    }
+
+    .slider:checked {
+      background: #7289DA;
+    }
+
+    .slider:before {
+      content: '';
+      position: relative;
+      top: 5px;
+      left: 5px;
+      width: 15px;
+      height: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      display: block;
+    }
+
+    .slider:checked:before {
+      transform: translateX(25px);
+    }
   </style>
 </head>
 <body>
 
 <header>
   <div id="userInfo"></div>
-  <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  <div class="slider-container">
+    <span class="slider-label">Toggle Dark Mode:</span>
+    <input type="checkbox" class="slider" id="darkModeToggle" onchange="toggleDarkMode()">
+  </div>
 </header>
 
 <div class="container">
@@ -178,10 +224,11 @@
 
   // Function to toggle between light and dark themes
   function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    document.getElementById('userProfile').classList.toggle('dark-mode');
-    document.querySelector('header').classList.toggle('dark-mode');
-    document.getElementById('minecraftNickDisplay').classList.toggle('dark-mode');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    document.body.classList.toggle('dark-mode', darkModeToggle.checked);
+    document.getElementById('userProfile').classList.toggle('dark-mode', darkModeToggle.checked);
+    document.querySelector('header').classList.toggle('dark-mode', darkModeToggle.checked);
+    document.getElementById('minecraftNickDisplay').classList.toggle('dark-mode', darkModeToggle.checked);
   }
 
   // Function to display user information on the page
