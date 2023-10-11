@@ -149,7 +149,6 @@
     const minecraftNick = document.getElementById('minecraftNick').value;
     const user = JSON.parse(localStorage.getItem('discordUser'));
     localStorage.setItem(`minecraftNick_${user.id}`, minecraftNick);
-    alert('Minecraft Nickname saved successfully!');
     displayUserInfo();
   }
 
