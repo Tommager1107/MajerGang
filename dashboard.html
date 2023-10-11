@@ -140,4 +140,26 @@
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `client_id=${clientId}&client_secret=${clientSecret}&code=${authorizationCode}&grant_type=authorization_code&redirect_uri=${
+      body: `client_id=${clientId}&client_secret=${clientSecret}&code=${authorizationCode}&grant_type=authorization_code&redirect_uri=${encodeURIComponent(redirectUri)}`,
+    })
+      .then(response => response.json())
+      .then(data => {
+        const accessToken = data.access_token;
+
+        // Fetch user information using the access token
+        fetchUserInfo(accessToken)
+          .then(user => {
+            if (user) {
+              // Display user information on the page
+              displayUserInfo(user);
+            }
+          });
+      })
+      .catch(error => {
+        console.error('Error exchanging authorization code for access token:', error);
+      });
+  }
+</script>
+
+</body>
+</html>
