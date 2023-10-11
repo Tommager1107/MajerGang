@@ -166,6 +166,10 @@
       left: 25px; /* Adjusted left position */
       transform: translate(-50%, -50%);
     }
+
+    #loggedInUser.dark-mode {
+      color: #fff; /* Set the color for dark mode */
+    }
   </style>
 </head>
 <body>
@@ -233,6 +237,9 @@
     document.body.classList.toggle('dark-mode', darkModeToggle.checked);
     document.getElementById('userProfile').classList.toggle('dark-mode', darkModeToggle.checked);
     document.querySelector('header').classList.toggle('dark-mode', darkModeToggle.checked);
+
+    // Toggle dark mode for the logged-in user text
+    document.getElementById('loggedInUser').classList.toggle('dark-mode', darkModeToggle.checked);
   }
 
   // Function to display user information on the page
@@ -266,7 +273,7 @@
       localStorage.setItem('discordUser', JSON.stringify(user));
 
       // Display user information on the page
-      document.getElementById('userInfo').innerHTML = `Logged in as: ${user.username}#${user.discriminator}`;
+      document.getElementById('userInfo').innerHTML = `Logged in as: <span id="loggedInUser">${user.username}#${user.discriminator}</span>`;
       document.getElementById('userImage').style.backgroundImage = `url('https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png')`;
       document.getElementById('username').innerText = user.username;
       document.getElementById('discriminator').innerText = `#${user.discriminator}`;
