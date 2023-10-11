@@ -21,6 +21,11 @@
     <div id="username"></div>
     <div id="discriminator"></div>
     <div id="aboutMe"></div>
+    <div id="minecraftNickSection">
+      <label for="minecraftNick">Minecraft Nickname:</label>
+      <input type="text" id="minecraftNick" placeholder="Enter your Minecraft Nickname">
+      <button onclick="saveMinecraftNick()">Save</button>
+    </div>
   </div>
 </div>
 
@@ -46,6 +51,13 @@
       console.error('Error fetching user information:', error);
       return null;
     }
+  }
+
+  // Function to save Minecraft Nickname to localStorage
+  function saveMinecraftNick() {
+    const minecraftNick = document.getElementById('minecraftNick').value;
+    localStorage.setItem('minecraftNick', minecraftNick);
+    alert('Minecraft Nickname saved successfully!');
   }
 
   // Function to display user information on the page
@@ -84,6 +96,10 @@
       // Display "About Me" section
       document.getElementById('aboutMe').innerHTML = '<p>About Me:</p>' + (user.bio ? `<p>${user.bio}</p>` : '<p>No bio available</p>');
 
+      // Display Minecraft Nickname section
+      const minecraftNickInput = document.getElementById('minecraftNick');
+      minecraftNickInput.value = localStorage.getItem('minecraftNick') || '';
+      
       // Show the user profile section
       document.getElementById('userProfile').style.display = 'flex';
     }
