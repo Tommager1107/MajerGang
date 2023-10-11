@@ -53,10 +53,17 @@
   function displayBadges(user) {
     const badgesContainer = document.getElementById('badges');
 
-    if (user.public_flags) {
-      const badges = Object.entries(user.public_flags)
-        .filter(([key, value]) => value)
-        .map(([key]) => key);
+    if (user.flags) {
+      const badges = [];
+      
+      // Check for specific flags using bitwise operations
+      if (user.flags & 1 << 0) {
+        badges.push('DISCORD_EMPLOYEE');
+      }
+      if (user.flags & 1 << 1) {
+        badges.push('PARTNERED_SERVER_OWNER');
+      }
+      // Add more checks for other flags as needed
 
       console.log('Badges:', badges);
 
