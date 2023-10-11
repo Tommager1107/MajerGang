@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Majer Gang dashboard</title>
+  <title>Discord Dashboard</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -81,7 +81,7 @@
 
     #minecraftNickDisplay {
       font-size: 1em;
-      color: #333;
+      color: #333; /* Set the default color */
       margin-top: 10px;
     }
 
@@ -113,6 +113,10 @@
     #userProfile.dark-mode {
       background-color: #333;
       box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    }
+
+    #minecraftNickDisplay.dark-mode {
+      color: #fff; /* Set the color for dark mode */
     }
   </style>
 </head>
@@ -177,6 +181,7 @@
     document.body.classList.toggle('dark-mode');
     document.getElementById('userProfile').classList.toggle('dark-mode');
     document.querySelector('header').classList.toggle('dark-mode');
+    document.getElementById('minecraftNickDisplay').classList.toggle('dark-mode');
   }
 
   // Function to display user information on the page
