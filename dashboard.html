@@ -1,85 +1,23 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Majer Gang Discord profile</title>
-<link rel="shortcut icon"   type="x-icon" href="static (8).png">
+  <title>Discord Dashboard</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212; /* Dark background color */
-      color: #fff; /* White text color */
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.3s, color 0.3s;
-    }
+    /* Your existing styles */
 
-    header {
-      background-color: #333; /* Dark header background color */
-      color: #fff;
-      padding: 15px;
-      text-align: right;
-    }
-
-    .container {
+    #giftCardRedemption {
+      margin-top: 50px;
       text-align: center;
-      padding: 20px;
     }
 
-    #userProfile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-      background-color: #333; /* Dark profile background color */
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-      transition: background-color 0.3s, box-shadow 0.3s;
-    }
-
-    #userImage {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-top: 10px;
-      background-size: cover;
-    }
-
-    #username {
-      font-size: 1.5em;
-      margin-top: 10px;
-    }
-
-    #discriminator {
-      margin-top: 5px;
-    }
-
-    #aboutMe {
-      margin-top: 20px;
-    }
-
-    #minecraftNickSection {
-      margin-top: 20px;
-      text-align: left;
-    }
-
-    label {
-      font-size: 1em;
-    }
-
-    input {
+    #giftCardCode {
       width: 200px;
       padding: 5px;
       margin-top: 5px;
       border: 1px solid #ddd;
       border-radius: 3px;
-    }
-
-    #minecraftNickDisplay {
-      font-size: 1em;
-      margin-top: 10px;
     }
 
     button {
@@ -118,6 +56,15 @@
       <div id="minecraftNickDisplay"></div>
     </div>
   </div>
+
+  <!-- Gift Card Redemption Section -->
+  <div id="giftCardRedemption">
+    <h2>Gift Card Redemption</h2>
+    <label for="giftCardCode">Enter Gift Card Code:</label>
+    <input type="text" id="giftCardCode" placeholder="Enter code">
+    <button onclick="redeemGiftCard()">Redeem</button>
+    <p id="giftCardResult"></p>
+  </div>
 </div>
 
 <script>
@@ -153,7 +100,21 @@
     displayUserInfo();
   }
 
-  // Function to display user information on the page
+  // Function to redeem gift cards
+  function redeemGiftCard() {
+    const giftCardCode = document.getElementById('giftCardCode').value;
+
+    // Check if the entered code is the special case
+    if (giftCardCode === '987668698769876') {
+      // Display a message with instructions
+      document.getElementById('giftCardResult').innerText = 'DM to tommager on Discord and say to him: GIFT505859';
+    } else {
+      // Display an expired message (you can implement a proper validation logic here)
+      document.getElementById('giftCardResult').innerText = 'This gift card code is expired.';
+    }
+  }
+
+  // Call the displayUserInfo function on page load
   async function displayUserInfo() {
     // Check if the URL contains the 'code' parameter
     const authorizationCode = getQueryParameter('code');
