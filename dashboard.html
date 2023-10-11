@@ -5,7 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Discord Dashboard</title>
   <style>
-    /* Styles remain unchanged */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #7289DA;
+      color: #fff;
+      padding: 15px;
+      text-align: right;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    #userProfile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #userImage {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-top: 10px;
+      background-size: cover;
+    }
+
+    #username {
+      font-size: 1.5em;
+      margin-top: 10px;
+      color: #333;
+    }
+
+    #discriminator {
+      color: #999;
+      margin-top: 5px;
+    }
+
+    #aboutMe {
+      margin-top: 20px;
+      color: #666;
+    }
+
+    #minecraftNickSection {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    label {
+      font-size: 1em;
+      color: #333;
+    }
+
+    #minecraftNickDisplay {
+      font-size: 1em;
+      color: #333;
+      margin-top: 5px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin-top: 10px;
+      background-color: #7289DA;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4e5d94;
+    }
   </style>
 </head>
 <body>
@@ -55,8 +137,10 @@
   // Function to save Minecraft Nickname to localStorage
   function saveMinecraftNick() {
     const minecraftNick = document.getElementById('minecraftNick').value;
-    localStorage.setItem('minecraftNick', minecraftNick);
+    const user = JSON.parse(localStorage.getItem('discordUser'));
+    localStorage.setItem(`minecraftNick_${user.id}`, minecraftNick);
     alert('Minecraft Nickname saved successfully!');
+    displayUserInfo();
   }
 
   // Function to display user information on the page
@@ -86,6 +170,9 @@
     const user = await fetchUserInfo(accessToken);
 
     if (user) {
+      // Store the user in localStorage for future reference
+      localStorage.setItem('discordUser', JSON.stringify(user));
+
       // Display user information on the page
       document.getElementById('userInfo').innerHTML = `Logged in as: ${user.username}#${user.discriminator}`;
       document.getElementById('userImage').style.backgroundImage = `url('https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png')`;
