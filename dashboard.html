@@ -31,6 +31,28 @@
       border-radius: 50%;
       margin-top: 10px;
     }
+    #username {
+      font-size: 1.5em;
+      margin-top: 10px;
+    }
+    #discriminator {
+      color: #999;
+      margin-top: 5px;
+    }
+    #userBanner {
+      width: 100%;
+      height: 200px;
+      margin-top: 20px;
+      object-fit: cover;
+    }
+    #badges {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .badge {
+      margin: 0 5px;
+    }
   </style>
 </head>
 <body>
@@ -44,6 +66,9 @@
   <div id="userProfile" style="display:none;">
     <div id="userImage"></div>
     <div id="username"></div>
+    <div id="discriminator"></div>
+    <img id="userBanner" alt="User Banner">
+    <div id="badges"></div>
   </div>
 </div>
 
@@ -75,7 +100,20 @@
     document.getElementById('userInfo').innerHTML = `Logged in as: ${user.username}#${user.discriminator}`;
     document.getElementById('userImage').style.backgroundImage = `url('https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png')`;
     document.getElementById('username').innerText = user.username;
+    document.getElementById('discriminator').innerText = `#${user.discriminator}`;
+    document.getElementById('userBanner').src = user.banner ? `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.png` : '';
+    displayBadges(user);
     document.getElementById('userProfile').style.display = 'flex';
+  }
+
+  // Function to display user badges
+  function displayBadges(user) {
+    const badgesContainer = document.getElementById('badges');
+
+    if (user.public_flags) {
+      const badges = user.public_flags.toArray();
+      badgesContainer.innerHTML = badges.map(badge => `<img src="https://discord.com/assets/${badge}.png" alt="${badge}" class="badge">`).join('');
+    }
   }
 
   // Check if the URL contains the 'code' parameter
