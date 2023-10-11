@@ -7,14 +7,15 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f0f0f0;
+      background-color: #121212; /* Dark background color */
+      color: #fff; /* White text color */
       margin: 0;
       padding: 0;
       transition: background-color 0.3s, color 0.3s;
     }
 
     header {
-      background-color: #7289DA;
+      background-color: #333; /* Dark header background color */
       color: #fff;
       padding: 15px;
       text-align: right;
@@ -30,10 +31,10 @@
       flex-direction: column;
       align-items: center;
       margin-top: 20px;
-      background-color: #fff;
+      background-color: #333; /* Dark profile background color */
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
       transition: background-color 0.3s, box-shadow 0.3s;
     }
 
@@ -48,17 +49,14 @@
     #username {
       font-size: 1.5em;
       margin-top: 10px;
-      color: #333;
     }
 
     #discriminator {
-      color: #999;
       margin-top: 5px;
     }
 
     #aboutMe {
       margin-top: 20px;
-      color: #666;
     }
 
     #minecraftNickSection {
@@ -68,7 +66,6 @@
 
     label {
       font-size: 1em;
-      color: #333;
     }
 
     input {
@@ -81,7 +78,6 @@
 
     #minecraftNickDisplay {
       font-size: 1em;
-      color: #333; /* Set the default color */
       margin-top: 10px;
     }
 
@@ -99,93 +95,12 @@
     button:hover {
       background-color: #4e5d94;
     }
-
-    /* Dark Theme */
-    body.dark-mode {
-      background-color: #121212;
-      color: #fff;
-    }
-
-    header.dark-mode {
-      background-color: #333;
-    }
-
-    #userProfile.dark-mode {
-      background-color: #333;
-      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-    }
-
-    #minecraftNickDisplay.dark-mode {
-      color: #fff; /* Set the color for dark mode */
-    }
-
-    /* Slider Styles */
-    .slider-container {
-      display: flex;
-      align-items: center;
-      margin-top: 10px;
-    }
-
-    .slider-label {
-      margin-right: 10px;
-      color: #333;
-    }
-
-    .slider {
-      -webkit-appearance: none;
-      width: 50px;
-      height: 25px;
-      background: #ddd;
-      outline: none;
-      border-radius: 25px;
-      transition: background 0.3s;
-      position: relative;
-      cursor: pointer;
-      margin-left: 10px; /* Added margin for spacing */
-    }
-
-    .slider:checked {
-      background: #7289DA;
-    }
-
-    .slider:before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 5px; /* Adjusted left position */
-      transform: translate(-50%, -50%);
-      width: 15px;
-      height: 15px;
-      background-color: #fff;
-      border-radius: 50%;
-      transition: transform 0.3s;
-      display: block;
-    }
-
-    .slider:checked:before {
-      left: 25px; /* Adjusted left position */
-      transform: translate(-50%, -50%);
-    }
-
-    #loggedInUser.dark-mode {
-      color: #fff; /* Set the color for dark mode */
-    }
-
-     #username.dark-mode {
-      font-size: 1.5em;
-      margin-top: 10px;
-      color: #333;
-    }
   </style>
 </head>
 <body>
 
 <header>
   <div id="userInfo"></div>
-  <div class="slider-container">
-    <span class="slider-label">Toggle Dark Mode:</span>
-    <input type="checkbox" class="slider" id="darkModeToggle" onchange="toggleDarkMode()">
-  </div>
 </header>
 
 <div class="container">
@@ -237,17 +152,6 @@
     displayUserInfo();
   }
 
-  // Function to toggle between light and dark themes
-  function toggleDarkMode() {
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    document.body.classList.toggle('dark-mode', darkModeToggle.checked);
-    document.getElementById('userProfile').classList.toggle('dark-mode', darkModeToggle.checked);
-    document.querySelector('header').classList.toggle('dark-mode', darkModeToggle.checked);
-
-    // Toggle dark mode for the logged-in user text
-    document.getElementById('loggedInUser').classList.toggle('dark-mode', darkModeToggle.checked);
-  }
-
   // Function to display user information on the page
   async function displayUserInfo() {
     // Check if the URL contains the 'code' parameter
@@ -279,7 +183,7 @@
       localStorage.setItem('discordUser', JSON.stringify(user));
 
       // Display user information on the page
-      document.getElementById('userInfo').innerHTML = `Logged in as: <span id="loggedInUser">${user.username}#${user.discriminator}</span>`;
+      document.getElementById('userInfo').innerHTML = `Logged in as: ${user.username}#${user.discriminator}`;
       document.getElementById('userImage').style.backgroundImage = `url('https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png')`;
       document.getElementById('username').innerText = user.username;
       document.getElementById('discriminator').innerText = `#${user.discriminator}`;
@@ -293,7 +197,6 @@
 
       if (storedMinecraftNick) {
         minecraftNickDisplay.innerHTML = `<p>Minecraft Nickname: ${storedMinecraftNick}</p>`;
-        minecraftNickDisplay.classList.toggle('dark-mode', darkModeToggle.checked);
       } else {
         minecraftNickDisplay.innerHTML = '<p>No Minecraft Nickname</p>';
       }
