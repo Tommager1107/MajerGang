@@ -233,7 +233,6 @@
     document.body.classList.toggle('dark-mode', darkModeToggle.checked);
     document.getElementById('userProfile').classList.toggle('dark-mode', darkModeToggle.checked);
     document.querySelector('header').classList.toggle('dark-mode', darkModeToggle.checked);
-    document.getElementById('minecraftNickDisplay').classList.toggle('dark-mode', darkModeToggle.checked);
   }
 
   // Function to display user information on the page
@@ -281,7 +280,7 @@
 
       if (storedMinecraftNick) {
         minecraftNickDisplay.innerHTML = `<p>Minecraft Nickname: ${storedMinecraftNick}</p>`;
-        minecraftNickDisplay.classList.toggle('dark-mode', darkModeToggle.checked); // Added this line
+        minecraftNickDisplay.classList.toggle('dark-mode', darkModeToggle.checked);
       } else {
         minecraftNickDisplay.innerHTML = '<p>No Minecraft Nickname</p>';
       }
